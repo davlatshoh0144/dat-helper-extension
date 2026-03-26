@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "DAT Load Helper",
+  "version": "1.0.0",
+  "action": { "default_popup": "hello.html" },
+  "background": { "service_worker": "background.js" },
+  "permissions": ["tabs", "storage"],
+  "host_permissions": ["*://one.dat.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://one.dat.com/*"],
+      "js": ["injector.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["*://one.dat.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://one.dat.com/*"],
+      "js": ["dat_hover_icons.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}
